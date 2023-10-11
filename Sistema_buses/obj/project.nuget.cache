@@ -1,22 +1,22 @@
 {
   "version": 2,
-  "dgSpecHash": "YVnW0okKm45PHO4TmfD1VUvdb94KZoP3VMa35KisaKAJ4UNmvteNY4GvyrQeV9o2QZiTDd4EFkQdweiPntVsnQ==",
+  "dgSpecHash": "Y9/mf4vmuqVy+h1G65uOEghYhzng24s6p3n52YZiVz/e2BLaV64NazWRhKBxuILzFWi4Y38BXfdssHk4N6J1aQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Arbey Padilla\\source\\repos\\Sistema_buses\\Sistema_buses\\Sistema_buses.csproj",
+  "projectFilePath": "/home/valeria/Descargas/buses_parcial3/Sistema_buses/Sistema_buses.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Arbey Padilla\\.nuget\\packages\\dapper\\2.1.4\\dapper.2.1.4.nupkg.sha512",
-    "C:\\Users\\Arbey Padilla\\.nuget\\packages\\microsoft.extensions.configuration\\7.0.0\\microsoft.extensions.configuration.7.0.0.nupkg.sha512",
-    "C:\\Users\\Arbey Padilla\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
-    "C:\\Users\\Arbey Padilla\\.nuget\\packages\\microsoft.extensions.configuration.fileextensions\\7.0.0\\microsoft.extensions.configuration.fileextensions.7.0.0.nupkg.sha512",
-    "C:\\Users\\Arbey Padilla\\.nuget\\packages\\microsoft.extensions.configuration.json\\7.0.0\\microsoft.extensions.configuration.json.7.0.0.nupkg.sha512",
-    "C:\\Users\\Arbey Padilla\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\7.0.0\\microsoft.extensions.fileproviders.abstractions.7.0.0.nupkg.sha512",
-    "C:\\Users\\Arbey Padilla\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\7.0.0\\microsoft.extensions.fileproviders.physical.7.0.0.nupkg.sha512",
-    "C:\\Users\\Arbey Padilla\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\7.0.0\\microsoft.extensions.filesystemglobbing.7.0.0.nupkg.sha512",
-    "C:\\Users\\Arbey Padilla\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
-    "C:\\Users\\Arbey Padilla\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
-    "C:\\Users\\Arbey Padilla\\.nuget\\packages\\npgsql\\7.0.6\\npgsql.7.0.6.nupkg.sha512",
-    "C:\\Users\\Arbey Padilla\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
-    "C:\\Users\\Arbey Padilla\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512"
+    "/home/valeria/.nuget/packages/dapper/2.1.4/dapper.2.1.4.nupkg.sha512",
+    "/home/valeria/.nuget/packages/microsoft.extensions.configuration/7.0.0/microsoft.extensions.configuration.7.0.0.nupkg.sha512",
+    "/home/valeria/.nuget/packages/microsoft.extensions.configuration.abstractions/7.0.0/microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
+    "/home/valeria/.nuget/packages/microsoft.extensions.configuration.fileextensions/7.0.0/microsoft.extensions.configuration.fileextensions.7.0.0.nupkg.sha512",
+    "/home/valeria/.nuget/packages/microsoft.extensions.configuration.json/7.0.0/microsoft.extensions.configuration.json.7.0.0.nupkg.sha512",
+    "/home/valeria/.nuget/packages/microsoft.extensions.fileproviders.abstractions/7.0.0/microsoft.extensions.fileproviders.abstractions.7.0.0.nupkg.sha512",
+    "/home/valeria/.nuget/packages/microsoft.extensions.fileproviders.physical/7.0.0/microsoft.extensions.fileproviders.physical.7.0.0.nupkg.sha512",
+    "/home/valeria/.nuget/packages/microsoft.extensions.filesystemglobbing/7.0.0/microsoft.extensions.filesystemglobbing.7.0.0.nupkg.sha512",
+    "/home/valeria/.nuget/packages/microsoft.extensions.logging.abstractions/6.0.0/microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "/home/valeria/.nuget/packages/microsoft.extensions.primitives/7.0.0/microsoft.extensions.primitives.7.0.0.nupkg.sha512",
+    "/home/valeria/.nuget/packages/npgsql/7.0.6/npgsql.7.0.6.nupkg.sha512",
+    "/home/valeria/.nuget/packages/system.text.encodings.web/7.0.0/system.text.encodings.web.7.0.0.nupkg.sha512",
+    "/home/valeria/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }

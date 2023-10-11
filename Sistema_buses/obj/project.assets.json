@@ -673,26 +673,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Arbey Padilla\\.nuget\\packages\\": {}
+    "/home/valeria/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Arbey Padilla\\source\\repos\\Sistema_buses\\Sistema_buses\\Sistema_buses.csproj",
+      "projectUniqueName": "/home/valeria/Descargas/buses_parcial3/Sistema_buses/Sistema_buses.csproj",
       "projectName": "Sistema_buses",
-      "projectPath": "C:\\Users\\Arbey Padilla\\source\\repos\\Sistema_buses\\Sistema_buses\\Sistema_buses.csproj",
-      "packagesPath": "C:\\Users\\Arbey Padilla\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Arbey Padilla\\source\\repos\\Sistema_buses\\Sistema_buses\\obj\\",
+      "projectPath": "/home/valeria/Descargas/buses_parcial3/Sistema_buses/Sistema_buses.csproj",
+      "packagesPath": "/home/valeria/.nuget/packages/",
+      "outputPath": "/home/valeria/Descargas/buses_parcial3/Sistema_buses/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Arbey Padilla\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/valeria/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -743,7 +741,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/home/valeria/.dotnet/sdk/7.0.401/RuntimeIdentifierGraph.json"
       }
     }
   }
