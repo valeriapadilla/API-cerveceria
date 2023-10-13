@@ -17,7 +17,7 @@ namespace Sistema_buses.Services
         {
             return await _cargadorRepository.GetAllAsync();
         }
-        public async Task<Cargador_utilizado> GetByIdAsync(int cargador_id)
+        public async Task<Cargador> GetByIdAsync(int cargador_id)
         {
             //Validamos que el cargado exista y este usado
             var uncargadorusado = await _cargadorRepository.GetByIdAsync(cargador_id);
@@ -33,95 +33,85 @@ namespace Sistema_buses.Services
             
             if (unCargador.Marca.Length == 0)
                 throw new AppValidationException("No se puede insertar un cargador con valor nulo");
-            
+
+            var cargadorExistente = await _cargadorRepository.GetByNameAsync(unCargador.Marca);
 
             if (cargadorExistente.Id != 0)
-                throw new AppValidationException($"Ya existe un cargador  con la marca {unCargador.Marca}");
-
+                throw new AppValidationException($"Ya existe un cargador con esa marca {unCargador.Marca}");
             try
             {
-                bool resultadoAccion = await _estiloRepository
-                    .CreateAsync(unEstilo);
+                bool resultadoAccion = await _cargadorRepository.CreateAsync(unCargador);
 
                 if (!resultadoAccion)
                     throw new AppValidationException("Operación ejecutada pero no generó cambios en la DB");
 
-                estiloExistente = await _estiloRepository
-                    .GetByNameAsync(unEstilo.Nombre!);
+                cargadorExistente = await _cargadorRepository.GetByNameAsync(unCargador.Marca!);
             }
             catch (DbOperationException error)
             {
                 throw error;
             }
 
-            return estiloExistente;
+            return cargadorExistente;
         }
 
-        public async Task<Estilo> UpdateAsync(int estilo_id, Estilo unEstilo)
+        public async Task<Cargador> UpdateAsync(int cargador_id, Cargador uncargador)
         {
             //Validamos que los parametros sean consistentes
-            if (estilo_id != unEstilo.Id)
-                throw new AppValidationException($"Inconsistencia en el Id del estilo a actualizar. Verifica argumentos");
+            if (cargador_id != uncargador.Id)
+                throw new AppValidationException($"Inconsistencia en el Id del cargador a actualizar. Verifica argumentos");
 
-            //Validamos que el estilo tenga nombre
-            if (unEstilo.Nombre.Length == 0)
-                throw new AppValidationException($"No se puede actualizar el estilo {unEstilo.Id} para que tenga nombre nulo");
+            //Validamos que el cargador tenga su marca
+            if (uncargador.Marca.Length == 0)
+                throw new AppValidationException($"No se puede actualizar el cargador {uncargador.Id} por tener nombre nulo");
 
-            //Validamos que el nuevo nombre no exista previamente con otro Id
-            var estiloExistente = await _estiloRepository
-                .GetByNameAsync(unEstilo.Nombre!);
+            //Validamos que el nuevo cargador no exista previamente con otro Id
+            var cargadorExistente = await _cargadorRepository.GetByNameAsync(uncargador.Marca);
 
-            if (estiloExistente.Id != 0)
-                throw new AppValidationException($"Ya existe un estilo con el nombre {unEstilo.Nombre}");
+            if (cargadorExistente.Id != 0)
+                throw new AppValidationException($"Ya existe un cargador con la marca {uncargador.Marca}");
 
-            // validamos que el estilo a actualizar si exista con ese Id
-            estiloExistente = await _estiloRepository
-                .GetByIdAsync(unEstilo.Id);
+            // validamos que el cargador a actualizar si exista con ese Id
+            cargadorExistente = await _cargadorRepository.GetByIdAsync(uncargador.Id);
 
-            if (estiloExistente.Id == 0)
-                throw new AppValidationException($"No existe un estilo con el Id {unEstilo.Id} que se pueda actualizar");
+            if (cargadorExistente.Id == 0)
+                throw new AppValidationException($"No existe un cargador con el Id {uncargador.Id} que se pueda actualizar");
 
             try
             {
-                bool resultadoAccion = await _estiloRepository
-                    .UpdateAsync(unEstilo);
+                bool resultadoAccion = await _cargadorRepository.UpdateAsync(uncargador);
 
                 if (!resultadoAccion)
                     throw new AppValidationException("Operación ejecutada pero no generó cambios en la DB");
 
-                estiloExistente = await _estiloRepository
-                    .GetByNameAsync(unEstilo.Nombre!);
+                cargadorExistente = await _cargadorRepository.GetByNameAsync(uncargador.Marca!);
             }
             catch (DbOperationException error)
             {
                 throw error;
             }
 
-            return estiloExistente;
+            return cargadorExistente;
         }
 
-        public async Task DeleteAsync(int estilo_id)
+        public async Task DeleteAsync(int cargador_id)
         {
-            // validamos que el estilo a eliminar si exista con ese Id
-            var estiloExistente = await _estiloRepository
-                .GetByIdAsync(estilo_id);
+            // validamos que el cargador a eliminar si exista con ese Id
+            var cargadorexistente = await _cargadorRepository.GetByIdAsync(cargador_id);
 
-            if (estiloExistente.Id == 0)
-                throw new AppValidationException($"No existe un estilo con el Id {estilo_id} que se pueda eliminar");
+            if (cargadorexistente.Id == 0)
+                throw new AppValidationException($"No existe un cargador con el Id {cargador_id} que se pueda eliminar");
 
-            // Validamos que el estilo no tenga asociadas cervezas
-            var cantidadCervezasAsociadas = await _estiloRepository
-                .GetTotalAssociatedBeersAsync(estiloExistente.Id);
+            // Validamos que el cargador no este cargando un bus.
+            var busasociado = await _cargadorRepository.GetAssociatedBusAsync(cargador_id);
 
-            if (cantidadCervezasAsociadas > 0)
-                throw new AppValidationException($"Existen {cantidadCervezasAsociadas} cervezas " +
-                    $"asociadas al estilo {estiloExistente.Nombre}. No se puede eliminar");
+            if (busasociado > 0)
+                throw new AppValidationException($"Un bus esta utilizando el cargador {cargadorexistente.Id}. No se puede eliminar");
 
             //Si existe y no tiene cervezas asociadas, se puede eliminar
             try
             {
-                bool resultadoAccion = await _estiloRepository
-                    .DeleteAsync(estiloExistente);
+                bool resultadoAccion = await _cargadorRepository.DeleteAsync(cargadorexistente);
 
                 if (!resultadoAccion)
                     throw new AppValidationException("Operación ejecutada pero no generó cambios en la DB");

@@ -33,7 +33,30 @@ public class CargadorRepository : ICargadorRepository
         
     }
 
-    public async Task<Cargador_utilizado> GetByIdAsync(int cargador_id)
+    public async Task<Cargador> GetByIdAsync(int cargador_id)
+    {
+        Cargador unCargador = new Cargador();
+
+        using (var conexion = contextoDB.CreateConnection())
+        {
+            DynamicParameters parametrosSentencia = new DynamicParameters();
+            parametrosSentencia.Add("@cargador_id", cargador_id,
+                DbType.Int32, ParameterDirection.Input);
+
+            string sentenciaSQL = "SELECT * " +
+                                  "FROM cargadores " +
+                                  "WHERE id = @cargador_id ";
+
+            var resultado = await conexion.QueryAsync<Cargador>(sentenciaSQL,
+                parametrosSentencia);
+
+            if (resultado.Count() > 0)
+                unCargador = resultado.First();
+        }
+
+        return unCargador;
+    }
+    public async Task<Cargador_utilizado> GetByIdCargador_utilizadoAsync(int cargador_id)
     {
         Cargador_utilizado unCargador = new Cargador_utilizado();
 
@@ -48,6 +71,55 @@ public class CargadorRepository : ICargadorRepository
                                   "WHERE id = @cargador_id ";
 
             var resultado = await conexion.QueryAsync<Cargador_utilizado>(sentenciaSQL,
+                parametrosSentencia);
+
+            if (resultado.Count() > 0)
+                unCargador = resultado.First();
+        }
+
+        return unCargador;
+    }
+
+    public async Task<int> GetAssociatedBusAsync(int cargador_id)
+    {
+        Autobus unbus = new Autobus();
+        int n = 0;
+
+        using (var conexion = contextoDB.CreateConnection())
+        {
+            DynamicParameters parametrosSentencia = new DynamicParameters();
+            parametrosSentencia.Add("@cargador_id", cargador_id,
+                DbType.String, ParameterDirection.Input);
+
+            string sentenciaSQL = "SELECT c.bus_id " +
+                                  "FROM cargadores_utilizados c " +
+                                  "WHERE  c.cargador_id = @cargador_id ";
+
+            var resultado = await conexion.QueryAsync<Autobus>(sentenciaSQL,
+                parametrosSentencia);
+
+            if (resultado.Count() > 0)
+                n = 1;
+        }
+
+        return n;
+    }
+    
+    public async Task<Cargador> GetByNameAsync(string string_nombre)
+    {
+        Cargador unCargador = new Cargador();
+
+        using (var conexion = contextoDB.CreateConnection())
+        {
+            DynamicParameters parametrosSentencia = new DynamicParameters();
+            parametrosSentencia.Add("@string_nombre", string_nombre,
+                DbType.String, ParameterDirection.Input);
+
+            string sentenciaSQL = "SELECT id, marca " +
+                                  "FROM cargadores " +
+                                  "WHERE LOWER(marca) = LOWER(@string_nombre) ";
+
+            var resultado = await conexion.QueryAsync<Cargador>(sentenciaSQL,
                 parametrosSentencia);
 
             if (resultado.Count() > 0)
