@@ -33,9 +33,9 @@ public class CargadorRepository : ICargadorRepository
         
     }
 
-    public async Task<Cargador> GetByIdAsync(int cargador_id)
+    public async Task<Cargador_utilizado> GetByIdAsync(int cargador_id)
     {
-        Cargador unCargador = new Cargador();
+        Cargador_utilizado unCargador = new Cargador_utilizado();
 
         using (var conexion = contextoDB.CreateConnection())
         {
@@ -43,11 +43,11 @@ public class CargadorRepository : ICargadorRepository
             parametrosSentencia.Add("@cargador_id", cargador_id,
                 DbType.Int32, ParameterDirection.Input);
 
-            string sentenciaSQL = "SELECT id, marca " +
-                                  "FROM cargadores " +
+            string sentenciaSQL = "SELECT * " +
+                                  "FROM cargadores_utilizados " +
                                   "WHERE id = @cargador_id ";
 
-            var resultado = await conexion.QueryAsync<Cargador>(sentenciaSQL,
+            var resultado = await conexion.QueryAsync<Cargador_utilizado>(sentenciaSQL,
                 parametrosSentencia);
 
             if (resultado.Count() > 0)
@@ -56,7 +56,7 @@ public class CargadorRepository : ICargadorRepository
 
         return unCargador;
     }
-
+    
     public async Task<bool> CreateAsync(Cargador unCargador)
     {
         bool resultadoAccion = false;
@@ -64,12 +64,18 @@ public class CargadorRepository : ICargadorRepository
         {
             using (var conexion = contextoDB.CreateConnection())
             {
-                string sentenciaSQL = "INSERT INTO cargadores (marca) " +
-                                      "VALUES (@marca)";
+                string procedimiento = "core.p_inserta_cargador";
+                var parametros = new
+                {
+                    p_marca = unCargador.Marca
+                };
 
-                int filasAfectadas = await conexion.ExecuteAsync(sentenciaSQL,unCargador);
+                var cantidad_filas = await conexion.ExecuteAsync(
+                    procedimiento,
+                    parametros,
+                    commandType: CommandType.StoredProcedure);
 
-                if (filasAfectadas > 0)
+                if (cantidad_filas != 0)
                     resultadoAccion = true;
             }
         }
@@ -79,7 +85,6 @@ public class CargadorRepository : ICargadorRepository
         }
 
         return resultadoAccion;
-        
     }
 
     public async Task<bool> UpdateAsync(Cargador unCargador)
@@ -90,13 +95,19 @@ public class CargadorRepository : ICargadorRepository
         {
             using (var conexion = contextoDB.CreateConnection())
             {
-                string sentenciaSQL = "UPDATE cargadores " +
-                                      "SET marca = @Marca " +
-                                      "WHERE id = @Id";
+                string procedimiento = "core.p_actualiza_cargador";
+                var parametros = new
+                {
+                    p_id = unCargador.Id,
+                    p_nombre = unCargador.Marca
+                };
 
-                int filasAfectadas = await conexion.ExecuteAsync(sentenciaSQL, unCargador);
+                var cantidad_filas = await conexion.ExecuteAsync(
+                    procedimiento,
+                    parametros,
+                    commandType: CommandType.StoredProcedure);
 
-                if (filasAfectadas > 0)
+                if (cantidad_filas != 0)
                     resultadoAccion = true;
             }
         }
@@ -116,11 +127,18 @@ public class CargadorRepository : ICargadorRepository
         {
             using (var conexion = contextoDB.CreateConnection())
             {
-                string sentenciaSQL = "DELETE FROM cargadores WHERE id = @Id";
+                string procedimiento = "core.p_elimina_cargador";
+                var parametros = new 
+                { 
+                    p_id = unCargador.Id
+                };
 
-                var filasAfectadas = await conexion.ExecuteAsync(sentenciaSQL, unCargador);
+                var cantidad_filas = await conexion.ExecuteAsync(
+                    procedimiento,
+                    parametros,
+                    commandType: CommandType.StoredProcedure);
 
-                if (filasAfectadas > 0)
+                if (cantidad_filas != 0)
                     resultadoAccion = true;
             }
         }
