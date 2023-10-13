@@ -4,11 +4,11 @@ using Sistema_buses.Models;
 
 namespace Sistema_buses.Services
 {
-    public class EstiloService
+    public class CargadorServices
     {
         private readonly ICargadorRepository _cargadorRepository;
 
-        public EstiloService(ICargadorRepository cargadorRepository)
+        public CargadorServices(ICargadorRepository cargadorRepository)
         {
             _cargadorRepository = cargadorRepository;
         }

@@ -64,7 +64,7 @@ grant execute on all routines in schema core to buses_usr;
 alter user buses_usr set search_path to core;
 
 -- -------------------------------------
--- Procedimientos asociados al estilo
+-- Procedimientos asociados al cargador
 -- -------------------------------------
 
 -- Inserción
@@ -103,3 +103,41 @@ $$
     end;
 $$;
 
+-- -------------------------------------
+-- Procedimientos asociados al bus
+-- -------------------------------------
+-- Inserción
+create or replace procedure core.p_inserta_bus(
+                    in p_ruta varchar)
+    language plpgsql
+as
+$$
+    begin
+        insert into buses (ruta)
+        values (p_ruta);
+    end;
+$$;
+
+-- Actualización
+create or replace procedure core.p_actualiza_bus(
+                    in p_id integer,
+                    in p_ruta varchar)
+    language plpgsql
+as
+$$
+    begin
+        update buses
+        set
+            ruta = p_ruta
+        where id = p_id;
+    end;
+$$;
+
+-- Eliminación
+create or replace procedure core.p_elimina_bus(in p_id integer)
+language plpgsql as
+$$
+    begin
+        delete from buses b where b.id = p_id;
+    end;
+$$;
